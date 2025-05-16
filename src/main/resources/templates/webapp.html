@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Telegram WebApp</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body style="font-family: sans-serif; text-align: center; padding: 2rem;">
+<h1 th:text="${message}">Telegram WebApp</h1>
+
+<button onclick="sendToTelegram()">Отправить данные</button>
+
+<script>
+    const tg = window.Telegram.WebApp;
+
+    function sendToTelegram() {
+        tg.sendData(JSON.stringify({
+            event: "button_click",
+            time: new Date().toISOString()
+        }));
+    }
+
+    tg.expand();
+</script>
+</body>
+</html>

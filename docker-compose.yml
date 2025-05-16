@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  neo4j:
+    image: neo4j
+    container_name: neo4j
+    restart: unless-stopped
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/password
+      - NEO4JLABS_PLUGINS=["apoc"]
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+  rabbitmq-dict:
+    image: rabbitmq:3.8.22-management-alpine
+    container_name: rabbitmq-dict
+    restart: on-failure
+    ports:
+      - "15772:15672"
+      - "5772:5672"
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    volumes:
+      - ./compose-data/rabbitmq-data:/var/lib/rabbitmq
+  redis-dict:
+    container_name: redis-dict
+    image: redis:alpine
+    restart: always
+    ports:
+      - "6479:6379"
+    command: /bin/sh -c "redis-server --requirepass password"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  neo4j_data:
+  neo4j_logs:

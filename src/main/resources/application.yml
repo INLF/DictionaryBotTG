@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: DictionaryBot
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: password
+  rabbitmq:
+    host: localhost
+    port: 5772
+    username: admin
+    password: admin
+    publisher-confirm-type: correlated
+    publisher-returns: true
+  data:
+    redis:
+      host: localhost
+      port: 6479
+      password: password
+app:
+  import-arg-name: db.init.json-file
+
+logging:
+  level:
+    org.neo4j: ERROR
+    org.neo4j.ogm: ERROR
+    org.neo4j.driver: ERROR
+    org.springframework.data.neo4j: ERROR
+
+telegram:
+  bot:
+    token: ${TELEGRAM_BOT_TOKEN:}
