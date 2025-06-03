@@ -14,6 +14,5 @@
 8. Далее выполняем запрос (get запрос => можно просто в браузере
    открыть) https://api.telegram.org/bot${botToken}/setWebhook?url=${ngrok_url}/telegram, где `${botToken}` меняем на
    токен бота и `${ngrok_url}` меняем на ngrok https url
-
 9. Запускаем Spring Boot
 10. Пишем боту созданному в BotFather
