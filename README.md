@@ -17,3 +17,13 @@
 
 9. Запускаем Spring Boot
 10. Пишем боту созданному в BotFather
+
+[//]: # (    docker compose down -v --remove-orphans)
+
+[//]: # (    docker builder prune -f                      # очистка кеша билда)
+
+[//]: # (    docker rmi dictionarybot-spring-app:latest   # удаление старого образа)
+
+[//]: # (    docker compose build --no-cache)
+
+[//]: # (    docker compose up -d)

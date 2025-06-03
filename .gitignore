@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+en_ru_dict.json

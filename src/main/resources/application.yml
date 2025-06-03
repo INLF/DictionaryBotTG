@@ -1,25 +1,33 @@
 spring:
   application:
     name: DictionaryBot
+
   neo4j:
-    uri: bolt://localhost:7687
+    uri: ${SPRING_NEO4J_URI:bolt://neo4j:7687}
     authentication:
-      username: neo4j
-      password: password
+      username: ${SPRING_NEO4J_AUTH_USERNAME:neo4j}
+      password: ${SPRING_NEO4J_AUTH_PASSWORD:password}
+
   rabbitmq:
-    host: localhost
-    port: 5772
-    username: admin
-    password: admin
+    host: ${SPRING_RABBITMQ_HOST:rabbitmq-dict}
+    port: ${SPRING_RABBITMQ_PORT:5772}
+    username: ${SPRING_RABBITMQ_USERNAME:admin}
+    password: ${SPRING_RABBITMQ_PASSWORD:admin}
     publisher-confirm-type: correlated
     publisher-returns: true
+
   data:
     redis:
-      host: localhost
-      port: 6479
-      password: password
+      host: ${SPRING_DATA_REDIS_HOST:redis-dict}
+      port: ${SPRING_DATA_REDIS_PORT:6479}
+      password: ${SPRING_DATA_REDIS_PASSWORD:password}
+
 app:
-  import-arg-name: db.init.json-file
+  import-arg-name: ${APP_IMPORT_ARG_NAME:db.init.json-file}
+
+telegram:
+  bot:
+    token: ${TELEGRAM_BOT_TOKEN:}
 
 logging:
   level:
@@ -27,7 +35,3 @@ logging:
     org.neo4j.ogm: ERROR
     org.neo4j.driver: ERROR
     org.springframework.data.neo4j: ERROR
-
-telegram:
-  bot:
-    token: ${TELEGRAM_BOT_TOKEN:}

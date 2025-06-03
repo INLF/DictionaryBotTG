@@ -100,14 +100,14 @@ public class GraphDataLoader implements ApplicationRunner {
             if (batch.size() >= batchSize) {
                 long start = System.nanoTime();
                 log.info("batch started {}", batch.size());
-                //customLexemeRepository.saveAllFast(batch);
+                customLexemeRepository.saveAllFast(batch);
                 long end = System.nanoTime();
                 log.info("batch ended {}", (long)(end - start) / 1_000_000);
                 batch.clear();
             }
         }
         if (!batch.isEmpty()) {
-            //customLexemeRepository.saveAllFast(batch);
+            customLexemeRepository.saveAllFast(batch);
         }
 
         // Phase 2: generate Relation list and push via APOC
